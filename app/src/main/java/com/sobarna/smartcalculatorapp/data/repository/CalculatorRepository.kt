@@ -1,4 +1,4 @@
-package com.sobarna.smartcalculatorapp.data
+package com.sobarna.smartcalculatorapp.data.repository
 
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
@@ -8,14 +8,17 @@ import androidx.lifecycle.map
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import com.sobarna.smartcalculatorapp.data.Result
 import com.sobarna.smartcalculatorapp.data.entity.CalculatorEntity
 import com.sobarna.smartcalculatorapp.data.room.CalculatorDao
 import com.sobarna.smartcalculatorapp.utils.Utils
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class CalculatorRepository private constructor(private val dao: CalculatorDao) {
+class CalculatorRepository @Inject constructor(private val dao: CalculatorDao) :
+    CalculatorRepositoryImpl {
 
-    fun getListHistory(): LiveData<Result<List<CalculatorEntity>>> = liveData {
+    override fun getListHistory(): LiveData<Result<List<CalculatorEntity>>> = liveData {
         emit(Result.Loading)
         try {
             emitSource(dao.getAllOperations().map {
@@ -26,7 +29,7 @@ class CalculatorRepository private constructor(private val dao: CalculatorDao) {
         }
     }
 
-    fun scanData(bitmap: Bitmap?): LiveData<Result<CalculatorEntity>> = liveData {
+    override fun scanData(bitmap: Bitmap?): LiveData<Result<CalculatorEntity>> = liveData {
         emit(Result.Loading)
         val textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
         val image = bitmap?.let { InputImage.fromBitmap(it, 0) }
@@ -69,14 +72,5 @@ class CalculatorRepository private constructor(private val dao: CalculatorDao) {
                 dao.insertOperation(value)
             }
         }
-    }
-
-    companion object {
-        @Volatile
-        private var instance: CalculatorRepository? = null
-
-        fun getInstance(dao: CalculatorDao): CalculatorRepository = instance ?: synchronized(this) {
-            instance ?: CalculatorRepository(dao)
-        }.also { instance = it }
     }
 }

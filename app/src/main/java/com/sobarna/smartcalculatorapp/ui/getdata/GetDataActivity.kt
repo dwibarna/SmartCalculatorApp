@@ -8,20 +8,21 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.sobarna.smartcalculatorapp.data.Result
-import com.sobarna.smartcalculatorapp.ui.ViewModelFactory
+import com.sobarna.smartcalculatorapp.databinding.ActivityGetDataBinding
 import com.sobarna.smartcalculatorapp.utils.Utils.displayImageBitMap
 import com.sobarna.smartcalculatorapp.utils.Utils.uriToFile
-import com.sobarna.smartcalculatorapp.databinding.ActivityGetDataBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GetDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGetDataBinding
-    private lateinit var viewModel: GetDataViewModel
-    private lateinit var factory: ViewModelFactory
+
+    private val viewModel: GetDataViewModel by viewModels()
 
     private val launcherCamera = registerForActivityResult(
         ActivityResultContracts.TakePicturePreview()
@@ -67,8 +68,6 @@ class GetDataActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGetDataBinding.inflate(layoutInflater)
-        factory = ViewModelFactory.getInstance(this)
-        viewModel = ViewModelProvider(this, factory)[GetDataViewModel::class.java]
         setContentView(binding.root)
 
         /*

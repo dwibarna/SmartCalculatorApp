@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.view.View
 import com.sobarna.smartcalculatorapp.databinding.ActivityMainBinding
 import com.sobarna.smartcalculatorapp.ui.list.CalculatorListActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
