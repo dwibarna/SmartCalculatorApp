@@ -1,4 +1,4 @@
-package com.sobarna.smartcalculatorapp
+package com.sobarna.smartcalculatorapp.ui.welcome
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.sobarna.smartcalculatorapp.databinding.ActivityMainBinding
+import com.sobarna.smartcalculatorapp.ui.list.CalculatorListActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initClick() {
         binding.btnStart.setOnClickListener {
-            Intent(this@MainActivity,CalculatorListActivity::class.java).let(::startActivity)
+            Intent(this@MainActivity, CalculatorListActivity::class.java).let(::startActivity)
+            finish()
         }
     }
 
