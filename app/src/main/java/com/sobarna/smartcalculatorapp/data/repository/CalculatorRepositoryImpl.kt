@@ -7,7 +7,7 @@ import com.sobarna.smartcalculatorapp.data.entity.CalculatorEntity
 
 interface CalculatorRepositoryImpl {
 
-    fun scanData(bitmap: Bitmap?): LiveData<Result<CalculatorEntity>>
+    fun scanData(bitmap: Bitmap?, stateLocalStorage: Boolean): LiveData<Result<CalculatorEntity>>
 
-    fun getListHistory(): LiveData<Result<List<CalculatorEntity>>>
+    fun getListHistory(stateLocalStorage: Boolean): LiveData<Result<List<CalculatorEntity>>>
 }

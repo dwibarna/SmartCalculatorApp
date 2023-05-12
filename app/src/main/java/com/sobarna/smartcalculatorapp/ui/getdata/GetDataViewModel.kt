@@ -7,8 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class GetDataViewModel @Inject constructor(private val repository: CalculatorRepository): ViewModel() {
+class GetDataViewModel @Inject constructor(private val repository: CalculatorRepository) : ViewModel() {
 
-    fun scanCalculator(bitmap: Bitmap?) = repository.scanData(bitmap)
+    fun scanCalculator(bitmap: Bitmap?, state: Boolean) = repository.scanData(bitmap, state)
 
 }

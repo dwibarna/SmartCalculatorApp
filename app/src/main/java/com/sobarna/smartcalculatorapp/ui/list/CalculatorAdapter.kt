@@ -2,19 +2,20 @@ package com.sobarna.smartcalculatorapp.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sobarna.smartcalculatorapp.data.entity.CalculatorEntity
 import com.sobarna.smartcalculatorapp.databinding.ContentAdapterListBinding
 
-class CalculatorAdapter(private val list: List<CalculatorEntity>) :
-    RecyclerView.Adapter<CalculatorAdapter.ViewHolder>() {
+class CalculatorAdapter :ListAdapter<CalculatorEntity,CalculatorAdapter.ViewHolder>(DiffCallback) {
 
     inner class ViewHolder(private val binding: ContentAdapterListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindItem(calculatorEntity: CalculatorEntity) {
             with(binding) {
-                textView.text = "Result:  ${calculatorEntity.input}"
-                textView1.text = "Output:  ${calculatorEntity.output}"
+                tvInput.text = calculatorEntity.input
+                tvOutput.text = calculatorEntity.output.toString()
             }
         }
     }
@@ -29,11 +30,19 @@ class CalculatorAdapter(private val list: List<CalculatorEntity>) :
         )
     }
 
-    override fun getItemCount(): Int {
-        return list.size
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        getItem(position).let {
+            holder.bindItem(it)
+        }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(list[position])
+    companion object DiffCallback : DiffUtil.ItemCallback<CalculatorEntity>() {
+        override fun areItemsTheSame(oldItem: CalculatorEntity, newItem: CalculatorEntity): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: CalculatorEntity, newItem: CalculatorEntity): Boolean {
+            return oldItem.id == newItem.id
+        }
     }
 }

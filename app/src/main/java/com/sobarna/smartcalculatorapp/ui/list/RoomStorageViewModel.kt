@@ -5,11 +5,8 @@ import com.sobarna.smartcalculatorapp.data.repository.CalculatorRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-/*
-
 @HiltViewModel
-class CalculatorListViewModel @Inject constructor(private val repository: CalculatorRepository) : ViewModel() {
+class RoomStorageViewModel @Inject constructor(private val repository: CalculatorRepository) : ViewModel() {
 
-    fun getAllHistory(state: Boolean) = repository.getListHistory(state)
+    fun getAllHistory() = repository.getListHistory(true)
 }
- */

@@ -2,12 +2,12 @@ package com.sobarna.smartcalculatorapp.ui.list
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.sobarna.smartcalculatorapp.data.Result
-import com.sobarna.smartcalculatorapp.data.entity.CalculatorEntity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.sobarna.smartcalculatorapp.R
 import com.sobarna.smartcalculatorapp.databinding.ActivityCalculatorListBinding
 import com.sobarna.smartcalculatorapp.ui.getdata.GetDataActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class CalculatorListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCalculatorListBinding
-    private val viewModel: CalculatorListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,31 +26,20 @@ class CalculatorListActivity : AppCompatActivity() {
             Intent(this@CalculatorListActivity, GetDataActivity::class.java).let(::startActivity)
         }
 
-        viewModel.getAllHistory().observe(this) { result ->
-            when (result) {
-                is Result.Error -> {}
-                Result.Loading -> {}
-                is Result.Success -> {
-                    initAdapter(result.data)
-                }
-            }
-        }
-
+        initBottomNav()
     }
+    private fun initBottomNav() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        val navController = navHostFragment.navController
 
-    private fun initAdapter(list: List<CalculatorEntity>) {
-        if (list.isEmpty()) {
-            binding.clEmptyList.visibility = View.VISIBLE
-            binding.clContent.visibility = View.GONE
-        } else {
-            binding.clEmptyList.visibility = View.GONE
-            binding.clContent.visibility = View.VISIBLE
+        val appBarConfiguration = AppBarConfiguration.Builder(
+            R.id.nav_room,
+            R.id.nav_local
+        ).build()
 
-            binding.rvItem.apply {
-                adapter = CalculatorAdapter(list)
-                layoutManager = LinearLayoutManager(context)
-            }
-        }
+        setupActionBarWithNavController(
+            navController = navController, appBarConfiguration
+        )
+        binding.bottomNavView.setupWithNavController(navController)
     }
-
 }

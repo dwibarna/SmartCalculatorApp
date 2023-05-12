@@ -23,11 +23,12 @@ class GetDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGetDataBinding
 
     private val viewModel: GetDataViewModel by viewModels()
+    private var initState: Boolean = true
 
     private val launcherCamera = registerForActivityResult(
         ActivityResultContracts.TakePicturePreview()
     ) { result ->
-        setResultCalculator(result)
+        setResultCalculator(result,initState)
     }
 
     private val launcherIntentGallery = registerForActivityResult(
@@ -39,26 +40,30 @@ class GetDataActivity : AppCompatActivity() {
                 val file = uriToFile(it, this)
                 setResultCalculator(
                     BitmapFactory.decodeFile(file.path)
+                ,initState
                 )
             }
         }
     }
 
-    private fun setResultCalculator(result: Bitmap?) {
-        viewModel.scanCalculator(
-            result
-        ).observe(this) { res ->
-            when (res) {
-                is Result.Error -> {}
-                Result.Loading -> {}
-                is Result.Success -> {
-                    res.data.let {
-                        displayImageBitMap(
-                            applicationContext,
-                            result ?: "",
-                            binding.ivPreview
-                        )
-                        binding.textView99.text = "input: ${it.input}\noutput: ${it.output}"
+    private fun setResultCalculator(result: Bitmap?,state: Boolean) {
+            viewModel.scanCalculator(
+                result,
+                !state
+            ).observe(this) { res ->
+                when (res) {
+                    is Result.Error -> {}
+                    Result.Loading -> {}
+                    is Result.Success -> {
+                        res.data.let {
+                            displayImageBitMap(
+                                applicationContext,
+                                result ?: "",
+                                binding.ivPreview
+                            )
+
+                            binding.tvInput.text = it.input
+                            binding.tvOutput.text = it.output.toString()
                     }
                 }
             }
@@ -69,6 +74,10 @@ class GetDataActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGetDataBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.switchState.setOnCheckedChangeListener { _, b ->
+            initState = !b
+        }
 
         /*
         binding.btnTakeData.setOnClickListener {
@@ -93,7 +102,6 @@ class GetDataActivity : AppCompatActivity() {
                     )
                 }
         }
-
     }
 
     private fun permissionUsageStorage() {
@@ -129,7 +137,7 @@ class GetDataActivity : AppCompatActivity() {
                     null
                 )
             }
-        } else if(requestCode == REQUEST_CODE_PERMISSIONS) {
+        } else if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (!allPermissionStorageGranted()) {
                 Toast.makeText(this, "gak diijinin", Toast.LENGTH_SHORT).show()
                 finish()

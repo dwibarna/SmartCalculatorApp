@@ -3,10 +3,13 @@ package com.sobarna.smartcalculatorapp.utils
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.widget.ImageView
+import androidx.security.crypto.MasterKeys
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.sobarna.smartcalculatorapp.BuildConfig
 import org.mariuszgromada.math.mxparser.Expression
 import java.io.File
 import java.io.FileOutputStream
@@ -69,5 +72,11 @@ object Utils {
             .load(uri)
             .apply(RequestOptions().fitCenter())
             .into(imageView)
+    }
+
+    fun getMasterKey() =  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+    } else {
+        BuildConfig.MASTER_KEY_PRE_M
     }
 }

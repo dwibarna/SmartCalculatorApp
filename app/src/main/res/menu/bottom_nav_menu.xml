@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_room"
+        android:icon="@drawable/ic_database"
+        android:title="Room Storage" />
+
+    <item
+        android:id="@+id/nav_local"
+        android:icon="@drawable/baseline_folder_24"
+        android:title="Local Storage" />
+</menu>
