@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">SmartCalculatorApp</string>
+    <string name="input">Input\t\t\t:</string>
+    <string name="output">Output\t\t:</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start">Start</string>
+    <string name="get_started_with_smart_calculator">Get Started With Smart Calculator</string>
+    <string name="room_storage">Room Storage</string>
+    <string name="local_storage">Local Storage</string>
+    <string name="empty_data">empty data</string>
+    <string name="encrypt_result">Encrypt Result</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -8,10 +9,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="lemon">#EAE509</color>
+    <color name="napa">#7DCE13</color>
+    <color name="kelly_green">#5BB318</color>
+    <color name="seaweed_green">#2B7A0B</color>
 
-    <color name="cream">#FFF3E2</color>
-    <color name="peach">#FFE5CA</color>
-    <color name="coral">#FA9884</color>
-    <color name="tomato">#E74646</color>
 
 </resources>

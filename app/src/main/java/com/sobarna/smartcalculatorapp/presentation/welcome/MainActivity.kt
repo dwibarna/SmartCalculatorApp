@@ -1,13 +1,15 @@
-package com.sobarna.smartcalculatorapp
+package com.sobarna.smartcalculatorapp.presentation.welcome
 
 import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.sobarna.smartcalculatorapp.databinding.ActivityMainBinding
+import com.sobarna.smartcalculatorapp.presentation.list.CalculatorListActivity
+import com.sobarna.smartcalculatorapp.utils.Utils.setViewAnimation
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         setupAnimation()
         initClick()
@@ -22,7 +25,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initClick() {
         binding.btnStart.setOnClickListener {
-            Intent(this@MainActivity,CalculatorListActivity::class.java).let(::startActivity)
+            Intent(this@MainActivity, CalculatorListActivity::class.java).let(::startActivity)
+            finish()
         }
     }
 
@@ -39,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setViewAnimation(view: View, alpha: Float, duration: Long) =
-        ObjectAnimator.ofFloat(view, View.ALPHA, alpha).setDuration(duration)
+
 
 }
