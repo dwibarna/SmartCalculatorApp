@@ -7,6 +7,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.map
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.sobarna.smartcalculatorapp.data.Result
 import com.sobarna.smartcalculatorapp.data.secure.SecurityDataHandler
 import com.sobarna.smartcalculatorapp.data.entity.CalculatorEntity
@@ -53,7 +54,7 @@ class CalculatorRepository @Inject constructor(
         stateLocalStorage: Boolean
     ): Flow<Result<Calculator>> = flow {
         emit(Result.Loading)
-        val textRecognizer = TextRecognition.getClient()
+        val textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
         val image = bitmap?.let { InputImage.fromBitmap(it, 0) }
         val mutable: MutableLiveData<Calculator> = MutableLiveData()
 
