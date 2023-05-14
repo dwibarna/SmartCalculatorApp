@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.list.CalculatorListActivity">
+    tools:context=".presentation.list.CalculatorListActivity">
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

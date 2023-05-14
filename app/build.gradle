@@ -22,7 +22,7 @@ android {
     buildTypes {
 
         all {
-            buildConfigField"String", "MASTER_KEY_PRE_M", MASTER_KEY_PRE_M
+            buildConfigField "String", "MASTER_KEY_PRE_M", MASTER_KEY_PRE_M
         }
 
         release {
@@ -30,6 +30,42 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "color", "type"
+
+    productFlavors {
+        red {
+            dimension "color"
+            applicationIdSuffix ".red"
+        }
+        green {
+            dimension "color"
+            applicationIdSuffix ".green"
+        }
+        filesystem {
+            dimension "type"
+            buildConfigField "boolean", "TYPE_INPUT_DATA", "true"
+            applicationIdSuffix ".filesystem"
+        }
+        'built-in-camera' {
+            dimension "type"
+            buildConfigField "boolean", "TYPE_INPUT_DATA", "false"
+            applicationIdSuffix ".builtincamera"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        def flavors = ""
+        variant.productFlavors.each { flavor ->
+            flavors += "${flavor.name}-"
+        }
+        flavors = flavors.substring(0, flavors.length() - 1)
+        variant.outputs.all {
+            def fileName = "app-$flavors"
+            outputFileName = "${fileName}.apk"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -40,7 +76,9 @@ android {
     viewBinding {
         enabled = true
     }
+
 }
+
 
 dependencies {
 

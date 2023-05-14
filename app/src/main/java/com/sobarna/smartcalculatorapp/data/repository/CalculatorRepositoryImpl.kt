@@ -1,13 +1,13 @@
 package com.sobarna.smartcalculatorapp.data.repository
 
 import android.graphics.Bitmap
-import androidx.lifecycle.LiveData
+import com.sobarna.smartcalculatorapp.domain.model.Calculator
 import com.sobarna.smartcalculatorapp.data.Result
-import com.sobarna.smartcalculatorapp.data.entity.CalculatorEntity
+import kotlinx.coroutines.flow.Flow
 
 interface CalculatorRepositoryImpl {
 
-    fun scanData(bitmap: Bitmap?, stateLocalStorage: Boolean): LiveData<Result<CalculatorEntity>>
+    fun scanData(bitmap: Bitmap?, stateLocalStorage: Boolean): Flow<Result<Calculator>>
 
-    fun getListHistory(stateLocalStorage: Boolean): LiveData<Result<List<CalculatorEntity>>>
+    fun getListHistory(stateLocalStorage: Boolean): Flow<Result<List<Calculator>>>
 }

@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ui.welcome.MainActivity">
+    tools:context=".presentation.welcome.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:alpha="0"
-            android:text="Get Started With SmartCalculator"
+            android:text="@string/get_started_with_smart_calculator"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"

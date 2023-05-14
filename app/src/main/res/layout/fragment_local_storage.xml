@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.list.LocalStorageFragment">
+    tools:context=".presentation.list.local.LocalStorageFragment">
 
     <TextView
         android:id="@+id/tv_empty_data"
@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        android:text="empty data" />
+        android:text="@string/empty_data" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_item"

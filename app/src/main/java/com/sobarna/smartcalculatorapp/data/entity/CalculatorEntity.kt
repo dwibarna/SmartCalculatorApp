@@ -9,7 +9,7 @@ data class CalculatorEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo("id")
-    val id: Int = 0,
+    val id: Long = 0,
 
     @ColumnInfo("input")
     val input:String?,

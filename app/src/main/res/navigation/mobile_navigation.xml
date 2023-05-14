@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/nav_local"
-        android:name="com.sobarna.smartcalculatorapp.ui.list.LocalStorageFragment"
-        android:label="fragment_local_storage"
+        android:name="com.sobarna.smartcalculatorapp.presentation.list.local.LocalStorageFragment"
+        android:label="@string/local_storage"
         tools:layout="@layout/fragment_local_storage" />
 
     <fragment
         android:id="@+id/nav_room"
-        android:name="com.sobarna.smartcalculatorapp.ui.list.RoomStorageFragment"
-        android:label="fragment_room_storage"
+        android:name="com.sobarna.smartcalculatorapp.presentation.list.database.RoomStorageFragment"
+        android:label="@string/room_storage"
         tools:layout="@layout/fragment_room_storage" />
 </navigation>

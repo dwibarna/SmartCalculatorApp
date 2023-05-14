@@ -1,10 +1,12 @@
 package com.sobarna.smartcalculatorapp.utils
 
+import android.animation.ObjectAnimator
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.view.View
 import android.widget.ImageView
 import androidx.security.crypto.MasterKeys
 import com.bumptech.glide.Glide
@@ -24,6 +26,8 @@ object Utils {
         Locale.US
     ).format(System.currentTimeMillis())
 
+    fun setViewAnimation(view: View, alpha: Float, duration: Long) =
+        ObjectAnimator.ofFloat(view, View.ALPHA, alpha).setDuration(duration)
     fun resultCalculator(input: String): Pair<String, Double> {
         val lines = input.lines()
         var arithmeticInput = ""

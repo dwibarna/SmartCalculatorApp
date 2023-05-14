@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,7 +9,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        tools:context=".ui.getdata.GetDataActivity">
+        tools:context=".presentation.getdata.GetDataActivity">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/iv_preview"
+            app:layout_constraintStart_toStartOf="@id/iv_preview"
+            app:layout_constraintTop_toBottomOf="@id/iv_preview"
+            android:visibility="gone"
+            android:layout_marginTop="16dp"/>
 
         <ImageView
             android:id="@+id/iv_preview"
@@ -31,7 +40,8 @@
             android:layout_marginTop="16dp"
             android:text="@string/take_photo"
             android:textAllCaps="false"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/iv_preview"
             app:layout_constraintStart_toStartOf="@id/iv_preview"
             app:layout_constraintTop_toBottomOf="@id/iv_preview" />
@@ -117,7 +127,7 @@
             android:id="@+id/switch_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Encrypt Result"
+            android:text="@string/encrypt_result"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardView" />
 
